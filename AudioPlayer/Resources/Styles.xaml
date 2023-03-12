@@ -1,0 +1,528 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:iconsPack="http://metro.mahapps.com/winfx/xaml/iconpacks"
+                    xmlns:i="http://schemas.microsoft.com/xaml/behaviors"
+                    xmlns:clr="clr-namespace:System;assembly=mscorlib">
+
+    <SolidColorBrush x:Key="MainOrangeColor" Color="#C8B82F"/>
+    <SolidColorBrush x:Key="HoveredPlayButtonColor" Color="#dbca35"/>
+    <SolidColorBrush x:Key="MainYellowColor" Color="#C8A62F"/>
+    <SolidColorBrush x:Key="HoveredNextPrevButtonColor" Color="#dbb635"/>
+    <SolidColorBrush x:Key="BottomNavigationBarColor" Color="#CED0CE"/>
+    <SolidColorBrush x:Key="SideNavigationBarColor" Color="#3F403F"/>
+    <SolidColorBrush x:Key="AddSongButtonHoveredColor" Color="#e8e8e8"/>
+    <SolidColorBrush x:Key="TextColor" Color="#DFDFDF"/>
+    <SolidColorBrush x:Key="OkButtonColor" Color="#c9c9c9"/>
+    <SolidColorBrush x:Key="OkButtonHoveredColor" Color="#dedede"/>
+    <SolidColorBrush x:Key="SelectedSongColor" Color="#747474"/>
+    <SolidColorBrush x:Key="OptionButtonHoveredColor" Color="#5c5c5c"/>
+    <Color x:Key="GradientDark">#A2A1A1</Color>
+    <Color x:Key="GradientLight">#DFDFDF</Color>
+    <iconsPack:PackIconMaterial x:Key="PlayIcon" Kind="Play" 
+                                                    Width="30" 
+                                                    Height="30" 
+                                                    HorizontalAlignment="Center"
+                                                    VerticalAlignment="Center"
+                                                    Foreground="{StaticResource TextColor}"
+                                                    Margin="5,0,0,0"/>
+    <iconsPack:PackIconMaterial x:Key="PauseIcon" Kind="Pause" 
+                                                    Width="30" 
+                                                    Height="30" 
+                                                    HorizontalAlignment="Center"
+                                                    VerticalAlignment="Center"
+                                                    Foreground="{StaticResource TextColor}"
+                                                    Margin="0,0,0,0"/>
+
+
+    <Style x:Key="PlaySongButtonStyle" TargetType="{x:Type ToggleButton}">
+        <Setter Property="Height" Value="57"/>
+        <Setter Property="Width" Value="57"/>
+        <Setter Property="Background" Value="{StaticResource MainOrangeColor}"/>
+        <Setter Property="Cursor" Value="Hand"/>
+        <Setter Property="Content" Value="{StaticResource PlayIcon}"/>
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate>
+                    <Grid>
+                        <Border CornerRadius="50"
+                                Padding="0"
+                                Background="{TemplateBinding Button.Background}">
+                            <Border.Effect>
+                                <DropShadowEffect BlurRadius="4"
+                                                  Direction="270"
+                                                  Opacity="0.25"/>
+                            </Border.Effect>
+                        </Border>
+                        <ContentPresenter HorizontalAlignment="Center" 
+                                          VerticalAlignment="Center" 
+                                          Content="{TemplateBinding ToggleButton.Content}"/>
+                    </Grid>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+
+        <Style.Triggers>
+            <Trigger Property="IsEnabled" Value="False">
+                <Setter Property="Background" Value="#c9b463"/>
+            </Trigger>
+            <Trigger Property="IsMouseOver" Value="True">
+                <Setter Property="Background" Value="{StaticResource HoveredPlayButtonColor}"/>
+            </Trigger>
+            <DataTrigger Binding="{Binding Service.IsActive}" Value="True">
+                <Setter Property="Background" Value="{StaticResource HoveredPlayButtonColor}"/>
+                <Setter Property="Content" Value="{StaticResource PauseIcon}"/>
+            </DataTrigger>
+        </Style.Triggers>
+        
+    </Style>
+
+    <Style x:Key="NextPrevSongButtonStyle" TargetType="{x:Type Button}">
+        <Setter Property="Height" Value="31"/>
+        <Setter Property="Width" Value="90"/>
+        <Setter Property="Background" Value="{StaticResource MainYellowColor}"/>
+        <Setter Property="Cursor" Value="Hand"/>
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate>
+                    <Grid>
+                        <Border CornerRadius="15"
+                                Background="{TemplateBinding Button.Background}">
+                            <Border.Effect>
+                                <DropShadowEffect BlurRadius="6"
+                                                  Direction="270"
+                                                  Opacity="0.15"/>
+                            </Border.Effect>
+                        </Border>
+                        <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center" Content="{TemplateBinding Button.Content}"/>
+                    </Grid>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+
+        <Style.Triggers>
+            <Trigger Property="IsMouseOver" Value="True">
+                <Setter Property="Background" Value="{StaticResource HoveredNextPrevButtonColor}"/>
+            </Trigger>
+            <Trigger Property="IsEnabled" Value="False">
+                <Setter Property="Background" Value="#c4b16a"/>
+            </Trigger>
+        </Style.Triggers>
+    </Style>
+
+    <Style x:Key="AddSongButtonStyle" TargetType="{x:Type Button}">
+        <Setter Property="Height" Value="27"/>
+        <Setter Property="Width" Value="27"/>
+        <Setter Property="Background" Value="{StaticResource TextColor}"/>
+        <Setter Property="Cursor" Value="Hand"/>
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate>
+                    <Grid>
+                        <Border CornerRadius="50"
+                                Background="{TemplateBinding Button.Background}">
+                            <Border.Effect>
+                                <DropShadowEffect BlurRadius="6"
+                                                  Direction="315"
+                                                  Opacity="0.15"/>
+                            </Border.Effect>
+                        </Border>
+                        <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center" Content="{TemplateBinding Button.Content}"/>
+                    </Grid>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+
+        <Style.Triggers>
+            <Trigger Property="IsMouseOver" Value="True">
+                <Setter Property="Background" Value="{StaticResource AddSongButtonHoveredColor}"/>
+            </Trigger>
+        </Style.Triggers>
+    </Style>
+
+    <Style x:Key="DeleteButtonStyle" TargetType="{x:Type Button}">
+        <Setter Property="Height" Value="14"/>
+        <Setter Property="Width" Value="14"/>
+        <Setter Property="Background" Value="Transparent"/>
+        <Setter Property="Cursor" Value="Hand"/>
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate>
+                    <Grid>
+                        <Border CornerRadius="40"
+                                Background="{TemplateBinding Button.Background}">
+                        </Border>
+                        <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center" Content="{TemplateBinding Button.Content}"/>
+                    </Grid>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+
+        <Style.Triggers>
+            <Trigger Property="IsMouseOver" Value="True">
+                <Setter Property="Background" Value="{StaticResource OkButtonHoveredColor}"/>
+            </Trigger>
+        </Style.Triggers>
+    </Style>
+
+    <Style x:Key="SongButtonStyle" TargetType="{x:Type Button}">
+        <Setter Property="Background" Value="Transparent"/>
+        <Setter Property="Cursor" Value="Hand"/>
+        <Setter Property="Height" Value="56"/>
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate>
+                    <Grid>
+                        <Border Background="{TemplateBinding Button.Background}">
+                            <Grid>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="auto"/>
+                                    <ColumnDefinition Width="*"/>
+                                    <ColumnDefinition Width="auto"/>
+                                </Grid.ColumnDefinitions>
+
+                                <Border Grid.Column="0"
+                                        Background="{StaticResource TextColor}"
+                                        CornerRadius="50"
+                                        Margin="8,0,8,0"
+                                        Height="36"
+                                        Width="36"
+                                        HorizontalAlignment="Center"
+                                        VerticalAlignment="Center">
+                                    <iconsPack:PackIconMaterial Kind="MusicNote" 
+                                                                Height="20" 
+                                                                Width="20" 
+                                                                HorizontalAlignment="Center" 
+                                                                VerticalAlignment="Center"
+                                                                Foreground="{StaticResource MainYellowColor}"/>
+                                </Border>
+                                <Grid Grid.Column="1" VerticalAlignment="Center">
+                                    <Grid.RowDefinitions>
+                                        <RowDefinition Height="auto"/>
+                                        <RowDefinition Height="auto"/>
+                                    </Grid.RowDefinitions>
+
+                                    <TextBlock Text="{Binding SongName}"
+                                               FontSize="16"
+                                               FontWeight="Medium"
+                                               TextWrapping="NoWrap"
+                                               Foreground="{StaticResource MainYellowColor}"
+                                               Padding="0"
+                                               Margin="0,0,0,2"
+                                               Grid.Row="0"
+                                               HorizontalAlignment="Left"
+                                               VerticalAlignment="Center"/>
+                                    <TextBlock Text="{Binding PlayerName}"
+                                               FontSize="14"
+                                               FontWeight="Light"
+                                               TextWrapping="NoWrap"
+                                               Foreground="{StaticResource TextColor}"
+                                               Margin="0,2,0,0"
+                                               Padding="0"
+                                               Grid.Row="1"
+                                               HorizontalAlignment="Left"
+                                               VerticalAlignment="Center"/>
+
+                                </Grid>
+                                <Button Grid.Column="2"
+                                        Style="{StaticResource DeleteButtonStyle}"
+                                        Command="{Binding 
+                                        RelativeSource={RelativeSource AncestorType={x:Type ItemsControl}}, 
+                                        Path=DataContext.DeleteSongCommand}"
+                                        CommandParameter="{Binding}"
+                                        VerticalAlignment="Top"
+                                        Margin="3">
+                                    <iconsPack:Material Kind="Close" Width="7" Height="7"/>
+                                </Button>
+                            </Grid>
+                        </Border>
+                        
+                        <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center" Content="{TemplateBinding Button.Content}"/>
+                    </Grid>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+
+        <Style.Triggers>
+            <Trigger Property="IsMouseOver" Value="True">
+                <Setter Property="Background" Value="{StaticResource SelectedSongColor}"/>
+            </Trigger>
+            <DataTrigger Binding="{Binding IsPlaying}" Value="true">
+                <Setter Property="Background" Value="{StaticResource SelectedSongColor}"/>
+            </DataTrigger>
+        </Style.Triggers>
+    </Style>
+    
+    <Style x:Key="OkButtonStyle" TargetType="{x:Type Button}">
+        <Setter Property="Height" Value="40"/>
+        <Setter Property="Width" Value="80"/>
+        <Setter Property="FontWeight" Value="Bold"/>
+        <Setter Property="FontSize" Value="21"/>
+        <Setter Property="Background" Value="{StaticResource OkButtonColor}"/>
+        <Setter Property="Cursor" Value="Hand"/>
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate>
+                    <Grid>
+                        <Border CornerRadius="20"
+                                Background="{TemplateBinding Button.Background}">
+                            <Border.Effect>
+                                <DropShadowEffect BlurRadius="6"
+                                                  Direction="315"
+                                                  Opacity="0.15"/>
+                            </Border.Effect>
+                        </Border>
+                        <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center" Content="{TemplateBinding Button.Content}"/>
+                    </Grid>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+
+        <Style.Triggers>
+            <Trigger Property="IsMouseOver" Value="True">
+                <Setter Property="Background" Value="{StaticResource OkButtonHoveredColor}"/>
+            </Trigger>
+        </Style.Triggers>
+    </Style>
+
+    <Style x:Key="SliderRepeatButton" TargetType="RepeatButton">
+        <Setter Property="SnapsToDevicePixels" Value="true" />
+        <Setter Property="OverridesDefaultStyle" Value="true" />
+        <Setter Property="IsTabStop" Value="false" />
+        <Setter Property="Focusable" Value="false" />
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="RepeatButton">
+                    <Border  Background="{StaticResource MainOrangeColor}" Height="3"/>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+    <Style x:Key="HorSliderRepeatButton" TargetType="RepeatButton">
+        <Setter Property="SnapsToDevicePixels" Value="true" />
+        <Setter Property="OverridesDefaultStyle" Value="true" />
+        <Setter Property="IsTabStop" Value="false" />
+        <Setter Property="Focusable" Value="false" />
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="RepeatButton">
+                    <Border  Background="{StaticResource MainOrangeColor}" Width="3"/>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+
+    <Style x:Key="SliderRepeatButton1" TargetType="RepeatButton">
+        <Setter Property="SnapsToDevicePixels" Value="true" />
+        <Setter Property="OverridesDefaultStyle" Value="true" />
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="RepeatButton">
+                    <Border SnapsToDevicePixels="True" Background="{StaticResource MainYellowColor}" Height="2"/>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+    
+    <Style x:Key="HorSliderRepeatButton1" TargetType="RepeatButton">
+        <Setter Property="SnapsToDevicePixels" Value="true" />
+        <Setter Property="OverridesDefaultStyle" Value="true" />
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="RepeatButton">
+                    <Border SnapsToDevicePixels="True" Background="{StaticResource MainYellowColor}" Width="2"/>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+   
+
+    <Style x:Key="SliderThumb" TargetType="Thumb">
+        <Setter Property="SnapsToDevicePixels" Value="true" />
+        <Setter Property="OverridesDefaultStyle" Value="true" />
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="Thumb">
+                    <Ellipse Height="10" Width="10" Fill="{StaticResource MainOrangeColor}"></Ellipse>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+    <ControlTemplate x:Key="Slider"  TargetType="Slider">
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" MinHeight="2" />
+                <RowDefinition Height="Auto" />
+            </Grid.RowDefinitions>
+            <Track Grid.Row="1" x:Name="PART_Track"   >
+                <Track.DecreaseRepeatButton>
+                    <RepeatButton Style="{StaticResource SliderRepeatButton1}"  Command="Slider.DecreaseLarge" />
+                </Track.DecreaseRepeatButton>
+                <Track.Thumb>
+                    <Thumb Style="{StaticResource SliderThumb}"  />
+                </Track.Thumb>
+                <Track.IncreaseRepeatButton>
+                    <RepeatButton Style="{StaticResource SliderRepeatButton}" Command="Slider.IncreaseLarge" />
+                </Track.IncreaseRepeatButton>
+            </Track>
+        </Grid>
+    </ControlTemplate>
+
+    <ControlTemplate x:Key="HorSlider"  TargetType="Slider">
+        <Grid>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="Auto" />
+                <ColumnDefinition Width="Auto" MaxWidth="2" />
+                <ColumnDefinition Width="Auto" />
+            </Grid.ColumnDefinitions>
+            <Track Grid.Row="1" x:Name="PART_Track"   >
+                <Track.DecreaseRepeatButton>
+                    <RepeatButton Style="{StaticResource HorSliderRepeatButton1}"  Command="Slider.DecreaseLarge" />
+                </Track.DecreaseRepeatButton>
+                <Track.Thumb>
+                    <Thumb Style="{StaticResource SliderThumb}"  />
+                </Track.Thumb>
+                <Track.IncreaseRepeatButton>
+                    <RepeatButton Style="{StaticResource HorSliderRepeatButton}" Command="Slider.IncreaseLarge" />
+                </Track.IncreaseRepeatButton>
+            </Track>
+        </Grid>
+    </ControlTemplate>
+
+
+    <Style x:Key="Horizontal_Slider" TargetType="Slider">
+        <Setter Property="Focusable" Value="False"/>
+        <Setter Property="SnapsToDevicePixels" Value="true" />
+        <Setter Property="OverridesDefaultStyle" Value="true" />
+        <Setter Property="Padding" Value="0"/>
+        <Style.Triggers>
+            <Trigger Property="Orientation" Value="Horizontal">
+                <Setter Property="MinHeight" Value="21" />
+                <Setter Property="MinWidth" Value="104" />
+                <Setter Property="Template" Value="{StaticResource Slider}" />
+            </Trigger>
+        </Style.Triggers>
+    </Style>
+
+    <Style x:Key="SongInfoTextBox" TargetType="TextBox">
+        <Setter Property="FontSize" Value="15"/>
+        <Style.Resources>
+            <Style TargetType="{x:Type Border}">
+                <Setter Property="CornerRadius" Value="3" />
+            </Style>
+        </Style.Resources>
+    </Style>
+
+    <Style x:Key="BrowseButtonStyle" TargetType="{x:Type Button}">
+        <Setter Property="Height" Value="20"/>
+        <Setter Property="Width" Value="20"/>
+        <Setter Property="Background" Value="{StaticResource OkButtonColor}"/>
+        <Setter Property="Cursor" Value="Hand"/>
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate>
+                    <Grid>
+                        <Border CornerRadius="5"
+                                Background="{TemplateBinding Button.Background}">
+                            <Border.Effect>
+                                <DropShadowEffect BlurRadius="4"
+                                                  ShadowDepth="2"
+                                                  Direction="315"
+                                                  Opacity="0.15"/>
+                            </Border.Effect>
+                        </Border>
+                        <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center" Content="{TemplateBinding Button.Content}"/>
+                    </Grid>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+
+        <Style.Triggers>
+            <Trigger Property="IsMouseOver" Value="True">
+                <Setter Property="Background" Value="{StaticResource OkButtonHoveredColor}"/>
+            </Trigger>
+        </Style.Triggers>
+    </Style>
+
+    <Style x:Key="OptionsButtonStyle" TargetType="{x:Type Button}">
+        <Setter Property="Height" Value="27"/>
+        <Setter Property="Width" Value="27"/>
+        <Setter Property="Background" Value="Transparent"/>
+        <Setter Property="Cursor" Value="Hand"/>
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate>
+                    <Grid>
+                        <Border CornerRadius="50"
+                                Background="{TemplateBinding Button.Background}">
+                            <Border.Effect>
+                                <DropShadowEffect BlurRadius="4"
+                                                  ShadowDepth="2"
+                                                  Direction="315"
+                                                  Opacity="0.15"/>
+                            </Border.Effect>
+                        </Border>
+                        <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center" Content="{TemplateBinding Button.Content}"/>
+                    </Grid>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+
+        <Style.Triggers>
+            <Trigger Property="IsMouseOver" Value="True">
+                <Setter Property="Background" Value="{StaticResource OptionButtonHoveredColor}"/>
+            </Trigger>
+        </Style.Triggers>
+    </Style>
+
+    <Style x:Key="WindowButtonStyle" TargetType="{x:Type Button}">
+        <Setter Property="Height" Value="17"/>
+        <Setter Property="Width" Value="17"/>
+        <Setter Property="Background" Value="Transparent"/>
+        <Setter Property="Cursor" Value="Hand"/>
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate>
+                    <Grid>
+                        <Border CornerRadius="50"
+                                Background="{TemplateBinding Button.Background}">
+                            <Border.Effect>
+                                <DropShadowEffect BlurRadius="4"
+                                                  ShadowDepth="2"
+                                                  Direction="315"
+                                                  Opacity="0.15"/>
+                            </Border.Effect>
+                        </Border>
+                        <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center" Content="{TemplateBinding Button.Content}"/>
+                    </Grid>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+
+        <Style.Triggers>
+            <Trigger Property="IsMouseOver" Value="True">
+                <Setter Property="Background" Value="IndianRed"/>
+            </Trigger>
+        </Style.Triggers>
+    </Style>
+
+
+    <Style x:Key="Vertical_Slider" TargetType="Slider">
+        <Setter Property="Focusable" Value="False"/>
+        <Setter Property="SnapsToDevicePixels" Value="true" />
+        <Setter Property="OverridesDefaultStyle" Value="true" />
+        <Setter Property="Padding" Value="0"/>
+        <Style.Triggers>
+            <Trigger Property="Orientation" Value="Vertical">
+                <Setter Property="MinWidth" Value="21" />
+                <Setter Property="MinHeight" Value="104" />
+                <Setter Property="Template" Value="{StaticResource HorSlider}" />
+            </Trigger>
+        </Style.Triggers>
+    </Style>
+
+</ResourceDictionary>
